@@ -92,7 +92,7 @@
       <li><b>แคปหน้าจอ</b>เก็บไว้ แล้วแสดงที่โต๊ะลงทะเบียน</li>
     </ol>
     <form id="uid-form" novalidate>
-      <label for="uid">UID ของคุณ</label>
+      <label for="uid">OpenID ของคุณ</label>
       <input id="uid" inputmode="numeric" autocomplete="off" autocorrect="off" spellcheck="false" placeholder="เช่น 1013538126759026">
       <p class="error" id="error" role="alert"></p>
       <button type="submit" class="primary">สร้าง QR</button>
@@ -108,7 +108,7 @@
     <p class="hint">ตรวจให้แน่ใจว่าเลขตรงกับในเกม<br>เพิ่มความสว่างหน้าจอตอนสแกน</p>
     <button type="button" class="primary" id="save">บันทึกรูป QR</button>
     <p class="hint" id="save-hint">ถ้าบันทึกไม่ได้: <b>กดค้างที่รูป QR</b> แล้วเลือกบันทึกรูป หรือแคปหน้าจอ</p>
-    <button type="button" class="secondary" id="edit">แก้ไข UID</button>
+    <button type="button" class="secondary" id="edit">แก้ไข OpenID</button>
   </section>
 </main>
 
@@ -179,7 +179,7 @@
     qrCanvas = drawQr(uid);
     qrUid = uid;
     $("qr").src = qrCanvas.toDataURL("image/png");
-    $("qr").alt = "QR code for UID " + uid;
+    $("qr").alt = "QR code for OpenID " + uid;
     $("form-view").hidden = true;
     $("qr-view").hidden = false;
   }
@@ -234,11 +234,11 @@
     e.preventDefault();
     const uid = cleanUid($("uid").value);
     if (!uid) {
-      $("error").textContent = "กรุณากรอก UID";
+      $("error").textContent = "กรุณากรอก OpenID";
       return;
     }
     if (!UID_RE.test(uid)) {
-      $("error").textContent = "UID ต้องเป็นตัวเลข 6–16 หลัก ตรวจอีกครั้งในหน้าโปรไฟล์";
+      $("error").textContent = "OpenID ต้องเป็นตัวเลข 6–16 หลัก ตรวจอีกครั้งในหน้าโปรไฟล์";
       return;
     }
     store("set", uid);
